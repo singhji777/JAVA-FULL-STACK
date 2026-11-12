@@ -1,0 +1,12 @@
+Optional SPA fallback for direct navigation/refresh:
+If opening /employees or refreshing a React route returns 404, add a Spring MVC forward controller for UI routes only. Do not forward /api/**.
+
+Example:
+@Controller
+public class ReactForwardController {
+    @GetMapping({"/", "/login", "/dashboard", "/employees", "/employees/new",
+                 "/employees/edit/{id}", "/departments"})
+    public String forwardToReact() {
+        return "forward:/index.html";
+    }
+}
